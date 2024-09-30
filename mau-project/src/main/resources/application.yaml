@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   jpa:
     hibernate:
@@ -7,7 +10,8 @@ spring:
       format-sql: true
       dialect: .org.hibernate.dialect.MySQL8Dialect
       hibernate.format_sql: true
-      hibernate.dialect: org.hibernate.dialect.MySQLDialect
+    defer-datasource-initialization: true
+    open-in-view: false
   datasource:
     url: jdbc:mysql://localhost:3306/community?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
