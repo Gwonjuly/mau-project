@@ -24,7 +24,7 @@ public class UserController {
 
     @DeleteMapping("delete/{userId}")
     public ResponseEntity<Void> deleteUser(
-            @Parameter(description = "delete user ID", required = true) @PathVariable Long userId){
+            @Parameter(description = "delete user ID", required = true) @PathVariable("userId") Long userId){
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
