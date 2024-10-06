@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Component
@@ -24,7 +25,7 @@ public class JwtUtil {
 
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + expirationTime);
-        var key = Keys.hmacShaKeyFor(secretKey.getBytes());
+        SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes());
 
         return Jwts.builder()
                 .setSubject(userName)
@@ -35,9 +36,12 @@ public class JwtUtil {
     }
 
     public boolean validateToken(String token) {
+
+        SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes());
+
         try{
             Jwts.parser()
-                    .setSigningKey(secretKey)
+                    .setSigningKey(key)
                     .parseClaimsJws(token);
             return true;
         }catch(Exception e){
