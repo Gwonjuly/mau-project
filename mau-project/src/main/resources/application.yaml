@@ -20,3 +20,12 @@ spring:
 
 springdoc:
   model-and-view-allowed: true
+
+jwt:
+  secret:
+    key: SpringBootJWTHelperTokenSecretKeyValue123!@#
+  access-token:
+    plus-hour: 4
+  refresh-token:
+    plus-hour: 12
+  expiration: 3600000
