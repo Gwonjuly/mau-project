@@ -14,7 +14,7 @@ services:
     environment:
       - MYSQL_DATABASE= community
       - MYSQL_ROOT_PASSWORD=root1234!!
-      - MYSQL_ROOT_USER=julee
+      - MYSQL_USER=julee
       - MYSQL_PASSWORD=hj44670@
       - TZ=Asia/Seoul
     volumes:
