@@ -23,7 +23,7 @@ springdoc:
 
 jwt:
   secret:
-    key: SpringBootJWTHelperTokenSecretKeyValue123!@#
+    key: SpringBootJWTHelperTokenSecretKeyValue123!@#tmvmfldqkqajremtdlqjwjsdjqgksmsrjrmaksgo
   access-token:
     plus-hour: 4
   refresh-token:
