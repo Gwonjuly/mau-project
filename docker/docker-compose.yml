@@ -15,7 +15,7 @@ services:
       - MYSQL_DATABASE= community
       - MYSQL_ROOT_PASSWORD=root1234!!
       - MYSQL_USER=julee
-      - MYSQL_PASSWORD=hj44670@
+      - MYSQL_PASSWORD=hj44670@@
       - TZ=Asia/Seoul
     volumes:
       - C:\FC\MYSQL:/var/lib/mysql
