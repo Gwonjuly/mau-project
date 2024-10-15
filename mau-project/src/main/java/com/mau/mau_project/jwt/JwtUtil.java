@@ -50,8 +50,11 @@ public class JwtUtil {
     }
 
     public String getUserNameFromToken(String token) {
+
+        SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes());
+
         Claims claims = Jwts.parser()
-                .setSigningKey(secretKey)
+                .setSigningKey(key)
                 .parseClaimsJws(token)
                 .getBody();
         return claims.getSubject();
