@@ -1,8 +1,9 @@
 package com.mau.mau_project.config;
 
+import com.mau.mau_project.domain.jwt.service.JwtBlacklistService;
 import com.mau.mau_project.domain.user.service.CustomUserDetailService;
 import com.mau.mau_project.filter.JwtAuthenticationFilter;
-import com.mau.mau_project.jwt.JwtUtil;
+import com.mau.mau_project.domain.jwt.service.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,8 @@ public class SecurityConfig {
     private CustomUserDetailService userDetailService;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private JwtBlacklistService jwtBlacklistService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -33,7 +36,7 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(new JwtAuthenticationFilter(jwtUtil, userDetailService), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthenticationFilter(jwtUtil, userDetailService, jwtBlacklistService), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         return http.build();
