@@ -1,13 +1,15 @@
 package com.mau.mau_project.domain.user.controller;
 
+import com.mau.mau_project.domain.jwt.service.JwtBlacklistService;
 import com.mau.mau_project.domain.user.controller.model.UserLoginRequest;
 import com.mau.mau_project.domain.user.controller.model.UserSignUpRequest;
 import com.mau.mau_project.db.user.entity.UserEntity;
 import com.mau.mau_project.domain.user.service.CustomUserDetailService;
 import com.mau.mau_project.domain.user.service.UserService;
-import com.mau.mau_project.jwt.JwtUtil;
+import com.mau.mau_project.domain.jwt.service.JwtUtil;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.AuthenticationException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @RequiredArgsConstructor
 @RestController
@@ -29,6 +35,7 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailService customUserDetailService;
     private final JwtUtil jwtUtil;
+    private final JwtBlacklistService jwtBlacklistService;
 
     @PostMapping("/sign-up")
     public ResponseEntity<UserEntity> createUser(@RequestBody UserSignUpRequest request){
@@ -52,14 +59,28 @@ public class UserController {
         Cookie cookie = new Cookie("token", token);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
-        cookie.setMaxAge(3600*3);
+        cookie.setMaxAge(3600);
         response.addCookie(cookie);
 
         return token;
     }
 
     @PostMapping("/logout")
-    public void logout(HttpServletResponse response){
+    public void logout(HttpServletResponse response, HttpServletRequest request, @CookieValue(value = "token", required = false) String cookieToken, @RequestParam(value = "requestToken", required = false) String requestToken){
+        String token = null;
+        String bearerToken = request.getHeader("Authorization");
+        if (requestToken != null) {
+            token = requestToken;
+        } else if (cookieToken != null) {
+            token = cookieToken;
+        } else if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            token = bearerToken.substring(7);
+        }
+        Instant instant = new Date().toInstant();
+        LocalDateTime expirationTime = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
+        String userName = jwtUtil.getUserNameFromToken(token);
+        jwtBlacklistService.blacklistToken(token, expirationTime, userName);
+
         Cookie cookie = new Cookie("token", null);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
