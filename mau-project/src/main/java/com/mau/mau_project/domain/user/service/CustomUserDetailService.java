@@ -1,7 +1,7 @@
 package com.mau.mau_project.domain.user.service;
 
-import com.mau.mau_project.db.user.entity.UserEntity;
-import com.mau.mau_project.db.user.repository.UserRepository;
+import com.mau.mau_project.db.user.UserEntity;
+import com.mau.mau_project.db.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;

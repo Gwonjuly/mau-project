@@ -1,6 +1,5 @@
-package com.mau.mau_project.db.jwt.repository;
+package com.mau.mau_project.db.jwt;
 
-import com.mau.mau_project.db.jwt.entity.JwtBlacklist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

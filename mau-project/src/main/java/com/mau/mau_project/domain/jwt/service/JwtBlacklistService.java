@@ -1,7 +1,7 @@
 package com.mau.mau_project.domain.jwt.service;
 
-import com.mau.mau_project.db.jwt.entity.JwtBlacklist;
-import com.mau.mau_project.db.jwt.repository.JwtBlacklistRepository;
+import com.mau.mau_project.db.jwt.JwtBlacklist;
+import com.mau.mau_project.db.jwt.JwtBlacklistRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

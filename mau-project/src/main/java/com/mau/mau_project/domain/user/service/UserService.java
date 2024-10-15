@@ -1,7 +1,7 @@
 package com.mau.mau_project.domain.user.service;
 
-import com.mau.mau_project.db.user.entity.UserEntity;
-import com.mau.mau_project.db.user.repository.UserRepository;
+import com.mau.mau_project.db.user.UserEntity;
+import com.mau.mau_project.db.user.UserRepository;
 import com.mau.mau_project.domain.user.controller.model.UserSignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

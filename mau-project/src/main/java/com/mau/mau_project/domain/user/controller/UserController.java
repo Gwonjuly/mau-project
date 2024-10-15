@@ -3,7 +3,7 @@ package com.mau.mau_project.domain.user.controller;
 import com.mau.mau_project.domain.jwt.service.JwtBlacklistService;
 import com.mau.mau_project.domain.user.controller.model.UserLoginRequest;
 import com.mau.mau_project.domain.user.controller.model.UserSignUpRequest;
-import com.mau.mau_project.db.user.entity.UserEntity;
+import com.mau.mau_project.db.user.UserEntity;
 import com.mau.mau_project.domain.user.service.CustomUserDetailService;
 import com.mau.mau_project.domain.user.service.UserService;
 import com.mau.mau_project.domain.jwt.service.JwtUtil;

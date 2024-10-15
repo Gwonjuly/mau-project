@@ -1,4 +1,4 @@
-package com.mau.mau_project.db.user.entity;
+package com.mau.mau_project.db.user;
 
 import jakarta.persistence.*;
 import lombok.*;

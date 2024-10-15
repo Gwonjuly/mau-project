@@ -1,6 +1,5 @@
-package com.mau.mau_project.db.user.repository;
+package com.mau.mau_project.db.user;
 
-import com.mau.mau_project.db.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
