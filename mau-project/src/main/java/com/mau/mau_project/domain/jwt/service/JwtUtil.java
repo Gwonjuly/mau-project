@@ -1,4 +1,4 @@
-package com.mau.mau_project.jwt;
+package com.mau.mau_project.domain.jwt.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -61,8 +61,11 @@ public class JwtUtil {
     }
 
     public Date getExpirationDateFromToken(String token) {
+
+        SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes());
+
         Claims claims = Jwts.parser()
-                .setSigningKey(secretKey)
+                .setSigningKey(key)
                 .parseClaimsJws(token)
                 .getBody();
         return claims.getExpiration();

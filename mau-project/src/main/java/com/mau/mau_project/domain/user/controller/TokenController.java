@@ -1,6 +1,6 @@
 package com.mau.mau_project.domain.user.controller;
 
-import com.mau.mau_project.jwt.JwtUtil;
+import com.mau.mau_project.domain.jwt.service.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
