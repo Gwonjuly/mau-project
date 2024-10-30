@@ -1,5 +1,7 @@
-package com.mau.mau_project.db.board;
+package com.mau.mau_project.db.article;
 
+import com.mau.mau_project.db.board.BoardEntity;
+import com.mau.mau_project.db.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BoardEntity {
+public class ArticleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,8 +24,17 @@ public class BoardEntity {
     @Column(nullable = false)
     private String title;
 
+    @Lob
     @Column(nullable = false)
-    private String description;
+    private String content;
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private UserEntity author;
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private BoardEntity board;
 
     @CreatedDate
     @Column(insertable = true)
