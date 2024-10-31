@@ -1,5 +1,6 @@
 package com.mau.mau_project.db.article;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mau.mau_project.db.board.BoardEntity;
 import com.mau.mau_project.db.user.UserEntity;
 import jakarta.persistence.*;
@@ -33,6 +34,7 @@ public class ArticleEntity {
     private UserEntity author;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private BoardEntity board;
 

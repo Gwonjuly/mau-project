@@ -66,7 +66,8 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public void logout(HttpServletResponse response, HttpServletRequest request, @CookieValue(value = "token", required = false) String cookieToken, @RequestParam(value = "requestToken", required = false) String requestToken){
+    public void logout(HttpServletResponse response, HttpServletRequest request, @CookieValue(value = "token", required = false) String cookieToken,
+                       @RequestParam(value = "requestToken", required = false) String requestToken){
         String token = null;
         String bearerToken = request.getHeader("Authorization");
         if (requestToken != null) {

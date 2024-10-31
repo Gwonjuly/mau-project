@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,5 +46,17 @@ public class ArticleService {
         articleRepository.save(articleEntity);
         return articleEntity;
 
+    }
+
+    public List<ArticleEntity> getArticle(Long boardId) {
+        return articleRepository.findTop10ByBoardIdOrderByCreatedDateDesc(boardId);
+    }
+
+    public List<ArticleEntity> getPreArticle(Long boardId, Long articleId) {
+        return articleRepository.findTop10ByBoardIdAndArticleIdLessThanOrderByCreatedDateDesc(boardId, articleId);
+    }
+
+    public List<ArticleEntity> getNextArticle(Long boardId, Long articleId) {
+        return articleRepository.findTop10ByBoardIdAndArticleIdGreaterThanOrderByCreatedDateDesc(boardId, articleId);
     }
 }

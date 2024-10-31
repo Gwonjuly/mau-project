@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/board")
@@ -21,5 +23,18 @@ public class ArticleController {
     @PostMapping ("/{boardId}/articles")
     public ResponseEntity<ArticleEntity> writeArticle(@RequestBody WriteArticleDto writeArticleDto) {
         return ResponseEntity.ok(articleService.writeArticle(writeArticleDto));
+    }
+
+    @GetMapping("/{boardId}/articles")
+    public ResponseEntity<List<ArticleEntity>> getArticles(@PathVariable("boardId") Long boardId,
+                                                           @RequestParam(value = "lastId", required = false) Long lastId,
+                                                           @RequestParam(value = "firstId", required = false) Long firstId ) {
+        if (lastId != null) {
+            return ResponseEntity.ok(articleService.getPreArticle(boardId,lastId));
+        }
+        if(firstId != null){
+            return ResponseEntity.ok(articleService.getNextArticle(boardId,firstId));
+        }
+        return ResponseEntity.ok(articleService.getArticle(boardId));
     }
 }
